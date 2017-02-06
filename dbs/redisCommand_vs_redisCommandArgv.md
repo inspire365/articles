@@ -1,12 +1,13 @@
 # redisCommand VS redisCommandArgv
 
-####   经过对比发现 Redis 官方C API中 redisCommandArgv 比 redisCommand 更高效！
-####   redisCommandArgv is more effective than redisCommand
+###   经过对比发现 Redis 官方C API中 redisCommandArgv 比 redisCommand 更高效！
+###   redisCommandArgv is more effective than redisCommand
 
    redisCommand & redisCommandArgv are two interfaces of redis official C client [hiredis](https://github.com/redis/hiredis). At the early begining, I used redisCommand to access Redis, it is intuitive and easy to understand. This lasted a long time. 
    
    Recently, I find that redisCommandArgv is more effective than redisCommand. Because redisCommand first parse the cmd and then reassemble to redis protocol, while redisCommandArgv has not parse phase. Show the code:
 
+####   code analysis
 ```C++
 void *redisCommand(redisContext *c, const char *format, ...) {
     va_list ap;
@@ -50,6 +51,19 @@ void *redisCommandArgv(redisContext *c, int argc, const char **argv, const size_
     return __redisBlockForReply(c);
 }
 ```
+
+####   simple benchmark report
+I wrote a simple test in my Intel I5 CPU desktop with ubuntu 13.04. Push 1000 elements to a set in one call, measure 3000 times consumption:
+Interface | 3000 time useage（ms）| time per call(ms)
+------------ | ------------- | -------------
+redisCommand | 6816 | 2.272
+redisCommandArgv | 2714 | 0.9047
+
+
+
+
+
+
 
 
 
