@@ -61,11 +61,10 @@ I wrote a simple test in my Intel I5 CPU desktop with ubuntu 13.04. Push 1000 el
 | redisCommandArgv | 2714 | 0.9047 |
 
 
+At the same time, redisCommandArgv is full binary compatible, while redisCommand is not that good for binary data.
 
-
-
-
-
+Conclusion:
+** when use Redis official C API, Use redisCommandArgv instead of redis redisCommand. **
 
 
 
