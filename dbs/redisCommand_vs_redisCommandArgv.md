@@ -54,10 +54,10 @@ void *redisCommandArgv(redisContext *c, int argc, const char **argv, const size_
 
 ####   simple benchmark report
 I wrote a simple test in my Intel I5 CPU desktop with ubuntu 13.04. Push 1000 elements to a set in one call, measure 3000 times consumption:
-Interface | 3000 time useage（ms）| time per call(ms)
------------- | ------------- | -------------
-redisCommand | 6816 | 2.272
-redisCommandArgv | 2714 | 0.9047
+|Interface | 3000 time useage（ms）| time per call(ms)|
+|------------ | ------------- | -------------|
+|redisCommand | 6816 | 2.272|
+|redisCommandArgv | 2714 | 0.9047|
 
 
 
