@@ -2,7 +2,7 @@ Thrift Binary Protocol Analysis
 
 我本人经常会使用到thrift，虽然对thrift协议不了解也不影响我们的使用，但如果对协议有更深入一些的了解，对使用和优化上会更得心应手。所以我决定通过一个简单的例子来分析了解thrift协议。
 
-如下面就是一个非常简单的thrift定义文件，并以这个作为例子进行分析：
+如下面就是一个非常简单的thrift定义文件，并以这个作为例子(fb.thrift)进行分析：
 ```
 struct FooBar
 {
@@ -16,7 +16,7 @@ service FbService
 } // end service
 ```
 
-通过用如下命令生成thrift C++文件
+通过用如下命令生成thrift C++文件:
 ```
 > thrift -r -strict --gen cpp -o . fb.thrift
 ```
@@ -128,5 +128,7 @@ uint32_t TBinaryProtocolT<Transport_>::writeI32(const int32_t i32) {
 为了不同机器的兼容性，先转化为网络字节序，再写入这32位数据。
 
 综上，可以大致了解到，thrift TBinaryProtocolT 大约是这样的：
+![thrift protocol](https://github.com/inspire365/articles/blob/master/analysis/thrift_binary.png)
+![thrift data types](https://github.com/inspire365/articles/blob/master/analysis/thrift_data_type.png)
 
 
